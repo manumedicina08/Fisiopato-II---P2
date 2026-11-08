@@ -1,0 +1,356 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Sprint de Fisiopatología II</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: encabezado fijo con pestañas por tema; cada pestaña trae lo esencial en tarjetas y tablas, más una trampa. Cite, flashcards y simulacro al final. Acento hematoxilina (violeta de la lámina H&E), rosa eosina como color de alerta. */
+:root{
+  --ground:#f3eff6; --surface:#ffffff; --surface2:#f8f5fa;
+  --ink:#1f1a26; --ink2:#5a5265; --ink3:#756d80;
+  --line:#ddd5e5; --line2:#ece6f1;
+  --accent:#5b3a9c; --accent-soft:#ece4f7; --on-accent:#ffffff;
+  --blue:#2f5590; --blue-soft:#e1e9f6;
+  --amber:#8a5410; --amber-soft:#f8ecd8;
+  --good:#2b6540; --good-soft:#dfeee3;
+  --bad:#a42a5b; --bad-soft:#f9e2ec;
+  --shadow:0 1px 2px rgba(30,20,50,.06), 0 6px 18px rgba(30,20,50,.05);
+  --f-display:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --f-body:"Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --ground:#130f18; --surface:#1d1724; --surface2:#261e2e;
+  --ink:#efe9f5; --ink2:#b9aec6; --ink3:#9a8fa8;
+  --line:#3a3046; --line2:#2d2438;
+  --accent:#b79cf0; --accent-soft:#33264d; --on-accent:#140c24;
+  --blue:#93b0ea; --blue-soft:#1b2843;
+  --amber:#e2a55c; --amber-soft:#3a2b16;
+  --good:#79c894; --good-soft:#16321f;
+  --bad:#f08fb4; --bad-soft:#3f1a2d;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.28);
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --ground:#130f18; --surface:#1d1724; --surface2:#261e2e;
+  --ink:#efe9f5; --ink2:#b9aec6; --ink3:#9a8fa8;
+  --line:#3a3046; --line2:#2d2438;
+  --accent:#b79cf0; --accent-soft:#33264d; --on-accent:#140c24;
+  --blue:#93b0ea; --blue-soft:#1b2843;
+  --amber:#e2a55c; --amber-soft:#3a2b16;
+  --good:#79c894; --good-soft:#16321f;
+  --bad:#f08fb4; --bad-soft:#3f1a2d;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.28);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--ground); color:var(--ink); font-family:var(--f-body); font-size:16px; line-height:1.55; margin:0}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:50; background:var(--ground)}
+h1,h2,h3,h4{font-family:var(--f-display); text-wrap:balance; margin:0; line-height:1.15}
+.gut{padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px))}
+
+.top{position:sticky; top:env(safe-area-inset-top,0px); z-index:40; background:color-mix(in srgb, var(--ground) 92%, transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+.top-in{max-width:1080px; margin:0 auto; padding-block:10px 0; display:flex; flex-direction:column; gap:8px}
+.brand{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap}
+.brand h1{font-size:19px; font-weight:800; letter-spacing:-.015em}
+.brand .sub{color:var(--ink2); font-size:13px}
+.theme-btn{margin-left:auto; border:1px solid var(--line); background:var(--surface); color:var(--ink2); border-radius:999px; padding:4px 11px; font:inherit; font-size:12px; cursor:pointer}
+nav.tabs{display:flex; flex-wrap:wrap; gap:4px; padding-bottom:9px}
+.tab{white-space:nowrap; border:1px solid transparent; background:transparent; color:var(--ink2); font:inherit; font-size:13.5px; font-weight:600; padding:6px 12px; border-radius:999px; cursor:pointer}
+.tab:hover{color:var(--ink); background:var(--surface2)}
+.tab[aria-selected="true"]{background:var(--accent); color:var(--on-accent); border-color:var(--accent)}
+.tab .num{font-family:var(--f-mono); opacity:.65; margin-right:5px; font-size:11.5px}
+.tab.hl{border-color:var(--accent); color:var(--accent)}
+.tab.hl[aria-selected="true"]{color:var(--on-accent)}
+@media (max-width:720px){nav.tabs{flex-wrap:nowrap; overflow-x:auto; scrollbar-width:thin}}
+:focus-visible{outline:2.5px solid var(--accent); outline-offset:2px; border-radius:4px}
+
+main{max-width:1080px; margin:0 auto; padding-block:22px 80px}
+.lede{max-width:68ch; color:var(--ink2); font-size:16.5px}
+h2.sec{font-size:26px; font-weight:800; letter-spacing:-.02em; margin-bottom:6px}
+.eyebrow{font-family:var(--f-mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:7px}
+.block{margin-top:24px}
+h3.blk{font-size:18px; font-weight:800; margin-bottom:10px; letter-spacing:-.01em}
+h4.sub{font-size:14px; font-weight:700; color:var(--ink2); margin-bottom:6px}
+p{margin:0 0 10px; max-width:70ch}
+.card{background:var(--surface); border:1px solid var(--line2); border-radius:12px; padding:15px 17px; box-shadow:var(--shadow); min-width:0}
+.card p:last-child,.card ul:last-child,.card ol:last-child{margin-bottom:0}
+.grid{display:grid; gap:12px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+ul.clean,ol.clean{margin:0; padding-left:1.15em}
+ul.clean li,ol.clean li{margin-bottom:4px}
+ul.clean li::marker,ol.clean li::marker{color:var(--accent); font-weight:700}
+.k{color:var(--ink); font-weight:700}
+.cap{font-size:13px; color:var(--ink3); margin-top:6px}
+
+.trap,.note,.good-box{border-radius:0 10px 10px 0; padding:12px 15px}
+.trap{border-left:4px solid var(--amber); background:var(--amber-soft)}
+.note{border-left:4px solid var(--blue); background:var(--blue-soft)}
+.good-box{border-left:4px solid var(--good); background:var(--good-soft)}
+.lbl{font-family:var(--f-mono); font-size:10.5px; letter-spacing:.13em; text-transform:uppercase; font-weight:500; display:block; margin-bottom:4px}
+.trap .lbl{color:var(--amber)} .note .lbl{color:var(--blue)} .good-box .lbl{color:var(--good)}
+.trap p:last-child,.note p:last-child,.good-box p:last-child{margin-bottom:0}
+
+.tw{overflow-x:auto; border:1px solid var(--line2); border-radius:12px; background:var(--surface); box-shadow:var(--shadow)}
+table{border-collapse:collapse; width:100%; min-width:540px; font-size:14.5px}
+th,td{text-align:left; padding:9px 13px; border-bottom:1px solid var(--line2); vertical-align:top}
+thead th{background:var(--surface2); font-size:11.5px; font-family:var(--f-mono); font-weight:500; letter-spacing:.09em; text-transform:uppercase; color:var(--ink2); border-bottom:1px solid var(--line)}
+tbody tr:last-child td{border-bottom:none}
+td.rh{font-weight:700; white-space:nowrap}
+
+.flow{display:flex; flex-wrap:wrap; align-items:center; gap:6px}
+.flow .s{background:var(--surface); border:1px solid var(--line); border-radius:9px; padding:7px 11px; font-size:14px; font-weight:600}
+.flow .s.hot{background:var(--accent-soft); border-color:var(--accent)}
+.flow .a{color:var(--ink3); font-weight:700}
+.flowbox{background:var(--surface2); border:1px solid var(--line2); border-radius:12px; padding:13px 14px}
+.flowbox + .flowbox{margin-top:8px}
+.flowbox .t{font-family:var(--f-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink2); margin-bottom:8px}
+
+.btn{font:inherit; font-size:14px; font-weight:600; padding:8px 16px; border-radius:9px; cursor:pointer; border:1px solid var(--line); background:var(--surface); color:var(--ink)}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:var(--on-accent)}
+.btn.ghost{background:transparent; color:var(--ink2)}
+.btn.good{background:var(--good-soft); border-color:var(--good); color:var(--good)}
+.btn.bad{background:var(--bad-soft); border-color:var(--bad); color:var(--bad)}
+.actions{display:flex; flex-wrap:wrap; gap:8px; align-items:center}
+
+.chiprow{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px}
+.chip{border:1px solid var(--line); background:var(--surface); color:var(--ink2); font:inherit; font-size:13px; font-weight:600; padding:5px 12px; border-radius:999px; cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:var(--on-accent)}
+.fc-stage{max-width:720px}
+.fc-meta{display:flex; justify-content:space-between; gap:10px; font-size:12px; color:var(--ink3); margin-bottom:8px; letter-spacing:.04em; font-family:var(--f-mono)}
+.fc{background:var(--surface); border:1px solid var(--line2); border-radius:14px; padding:24px; box-shadow:var(--shadow); min-height:180px; display:flex; flex-direction:column; gap:14px; justify-content:center; margin-bottom:12px}
+.fc-q{font-family:var(--f-display); font-size:20px; font-weight:600; line-height:1.3; text-wrap:balance}
+.fc-a{border-top:1px solid var(--line2); padding-top:14px; color:var(--ink2); font-size:15.5px}
+.fc-a b{color:var(--ink)}
+
+.qz-bar{display:flex; align-items:center; gap:12px; margin-bottom:14px; flex-wrap:wrap}
+.qz-prog{flex:1; min-width:120px; height:7px; background:var(--line2); border-radius:99px; overflow:hidden}
+.qz-fill{height:100%; width:0%; background:var(--accent); border-radius:99px; transition:width .3s ease}
+.qz-list{display:grid; gap:14px}
+.qz-item{background:var(--surface); border:1px solid var(--line2); border-radius:12px; padding:17px 19px; box-shadow:var(--shadow)}
+.qz-n{font-family:var(--f-mono); font-size:11px; color:var(--accent); letter-spacing:.1em; margin-bottom:6px; text-transform:uppercase}
+.qz-q{font-weight:700; font-size:16.5px; margin-bottom:12px; line-height:1.4}
+.qz-opts{display:grid; gap:7px}
+.opt{display:flex; gap:10px; align-items:flex-start; text-align:left; width:100%; font:inherit; font-size:15px; background:var(--surface2); border:1px solid var(--line2); color:var(--ink); border-radius:9px; padding:10px 13px; cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt:disabled{cursor:default}
+.opt .ltr{font-family:var(--f-mono); font-size:12px; color:var(--ink3); flex:none; padding-top:2px}
+.opt.right{background:var(--good-soft); border-color:var(--good)}
+.opt.wrong{background:var(--bad-soft); border-color:var(--bad)}
+.qz-exp{margin-top:11px; padding-top:11px; border-top:1px solid var(--line2); font-size:14.5px; color:var(--ink2)}
+.ok{color:var(--good); font-weight:700} .no{color:var(--bad); font-weight:700}
+.score{font-family:var(--f-mono); font-size:12.5px; color:var(--ink2)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.cite-group{margin-top:22px}
+.cite-group h3{font-size:14px; font-weight:500; margin-bottom:8px; color:var(--ink2); font-family:var(--f-mono); letter-spacing:.08em; text-transform:uppercase}
+.cite-list{display:grid; gap:8px}
+details.cq{background:var(--surface); border:1px solid var(--line2); border-radius:11px; box-shadow:var(--shadow)}
+details.cq summary{list-style:none; cursor:pointer; padding:11px 15px; font-weight:700; display:flex; gap:10px; align-items:flex-start}
+details.cq summary::-webkit-details-marker{display:none}
+details.cq summary::before{content:"+"; font-family:var(--f-mono); color:var(--accent); flex:none; width:12px}
+details.cq[open] summary::before{content:"–"}
+details.cq .star{color:var(--amber); flex:none}
+details.cq .n{margin-left:auto; flex:none; font-family:var(--f-mono); font-size:11.5px; color:var(--ink3); font-weight:500; padding-top:3px}
+details.cq ol{margin:0; padding:0 15px 13px 52px; color:var(--ink2)}
+details.cq ol li{margin-bottom:3px}
+details.cq ol li::marker{color:var(--accent); font-weight:700}
+</style>
+
+<header class="top"><div class="top-in gut">
+<div class="brand"><h1>Sprint de Fisiopatología II</h1><span class="sub">Renal, ácido-base, diabetes y endocrino · Dra. Sandrina Kassouf</span><button class="theme-btn" id="themeBtn" type="button">tema</button></div>
+<nav class="tabs" role="tablist" aria-label="Temas">
+<button class="tab" role="tab" data-p="inicio">★ Empieza aquí</button>
+<button class="tab" role="tab" data-p="glom"><span class="num">01</span>Glomerulopatías</button>
+<button class="tab" role="tab" data-p="nefro"><span class="num">02</span>Síndrome nefrótico</button>
+<button class="tab" role="tab" data-p="ab"><span class="num">03</span>Ácido-base</button>
+<button class="tab" role="tab" data-p="dm"><span class="num">04</span>Diabetes</button>
+<button class="tab" role="tab" data-p="tir"><span class="num">05</span>Tiroides</button>
+<button class="tab" role="tab" data-p="sup"><span class="num">06</span>Suprarrenal</button>
+<button class="tab" role="tab" data-p="cush"><span class="num">07</span>Cushing</button>
+<button class="tab hl" role="tab" data-p="cite">Cite</button>
+<button class="tab hl" role="tab" data-p="cards">Flashcards</button>
+<button class="tab hl" role="tab" data-p="quiz">Simulacro</button>
+</nav></div></header>
+<main class="gut">
+<section id="p-inicio" role="tabpanel" hidden><div class="eyebrow">Mapa del contenido</div><h2 class="sec">Cinco clases en una página</h2><p class="lede">Cinco bloques: <span class="k">glomerulopatías y síndrome nefrótico</span>, <span class="k">equilibrio ácido-base</span>, <span class="k">diabetes</span>, <span class="k">tiroides</span> y <span class="k">suprarrenal</span>. Estudia las pestañas en orden, pasa a las flashcards y cierra con el simulacro.</p><div class="block"><h3 class="blk">Las 12 ideas que no pueden faltar</h3><div class="grid g2"><div class="card"><ol class="clean"><li>Nefrítico: inflamación, <span class="k">hematuria</span>, proteinuria <3,5 g/día, oliguria, HTA. Nefrótico: proteinuria <span class="k">>3,5 g/día</span>, albúmina <3 g/dL, edema, hiperlipidemia.</li><li>GN postestreptocócica: 7–12 días tras faringe o piel, <span class="k">C3 bajo</span>, ASO elevada, IF granular IgG y C3.</li><li>Goodpasture: anticuerpos anti-MBG, IF <span class="k">lineal</span> de IgG, hemorragia pulmonar + insuficiencia renal.</li><li>Cambios mínimos no progresa a insuficiencia renal. <span class="k">Membranosa</span> es la causa primaria más común en adultos.</li><li>Normales: pH <span class="k">7,35–7,45</span>, PCO2 35–45, HCO3 22–26.</li><li>Regla <span class="k">MIRO</span>: metabólico, pH y HCO3 van iguales. Respiratorio, pH y PCO2 van opuestos.</li></ol></div><div class="card"><ol class="clean" start="7"><li>DM1: autoinmune, péptido C indetectable, cetoacidosis. DM2: resistencia a insulina, asintomática por años.</li><li>Diagnóstico DM: glucemia ayuno <span class="k">≥126</span>, 2 h PTOG ≥200, HbA1c <span class="k">≥6,5%</span>. Meta HbA1c <7%.</li><li>Hipotiroidismo primario: <span class="k">TSH alta</span> y T4 libre baja. Graves: anticuerpos contra el receptor de TSH.</li><li>Addison: ACTH alta, cortisol bajo, <span class="k">hiponatremia, hiperpotasemia</span>, hiperpigmentación.</li><li>Cushing: obesidad central, estrías violáceas, miopatía proximal. Cribado: cortisol libre en orina, dexametasona 1 mg, saliva a medianoche.</li><li>La hormona activa es <span class="k">T3</span>. Solo la fracción libre actúa.</li></ol></div></div></div><div class="block"><div class="trap"><span class="lbl">Atención</span><p>Cuatro puntos de las diapositivas que conviene verificar en Porth o Farreras: (1) en el cuadro de Cushing figura «hipercalcemia» donde el texto describe hiperpigmentación; (2) «cicatrización lenta: acantosis nigricans» mezcla dos ideas; (3) en la GN postestreptocócica se anotan crioglobulinas disminuidas; (4) el cortisol se ubica en fascicular y reticular, mientras que otra diapositiva asigna andrógenos a la reticular.</p></div></div></section>
+<section id="p-glom" role="tabpanel" hidden><div class="eyebrow">Unidad II · Función glomerular</div><h2 class="sec">Glomerulopatías: nefrítico y RPGN</h2><p class="lede">Glomerulonefritis es la inflamación de las estructuras glomerulares. Primaria si es la única enfermedad, secundaria si viene de otra (diabetes, LES). Los agentes pueden ser inmunitarios (la principal causa), no inmunitarios o hereditarios (Alport).</p><div class="block"><h3 class="blk">Nefrítico vs. nefrótico</h3><div class="tw"><table><thead><tr><th></th><th>Nefrítico</th><th>Nefrótico</th></tr></thead><tbody><tr><td class="rh">Mecanismo</td><td>Inflamación, ↓TFG, retención de líquidos</td><td>↑ permeabilidad, pérdida masiva de proteínas</td></tr><tr><td class="rh">Orina</td><td>Hematuria, cilindros hemáticos, proteinuria <3,5 g/día, oliguria</td><td>Proteinuria >3,5 g/día, lipiduria</td></tr><tr><td class="rh">Clínica</td><td>Edema leve a moderado, HTA moderada a severa</td><td>Edema generalizado (ascitis, cara), HTA solo en casos avanzados</td></tr><tr><td class="rh">Sangre</td><td>Creatinina elevada en casos graves</td><td>Hipoalbuminemia, hiperlipidemia</td></tr><tr><td class="rh">Biopsia</td><td>Inflamación, conglomerados de leucocitos</td><td>Pérdida de podocitos o cambios en la membrana basal</td></tr><tr><td class="rh">Complicaciones</td><td>HTA grave, insuficiencia renal aguda</td><td>Trombosis venosa, infecciones</td></tr></tbody></table></div></div><div class="block grid g2"><div class="card"><h3 class="blk">GN postinfecciosa aguda</h3><ul class="clean"><li>Estreptococo β-hemolítico grupo A previo; complejos inmunitarios depositados</li><li>Sobre todo niños. Aparece <span class="k">7–12 días</span> después</li><li>Oliguria, hematuria, edema de cara y manos, HTA, orina oscura</li><li>Lab: ASO elevada, <span class="k">C3 bajo</span></li><li>IF: depósitos granulares de IgG y C3 en el mesangio y la MBG</li></ul></div><div class="card"><h3 class="blk">Cambios celulares</h3><ul class="clean"><li>Proliferación (endotelial, mesangial, medias lunas)</li><li>Engrosamiento de la membrana basal</li><li>Esclerosis: más material extracelular. Fibrosis: colágeno</li><li>Difusos (todos), focales (algunos), segmentarios (parte del glomérulo), mesangiales</li></ul></div></div><div class="block grid g2"><div class="card"><h3 class="blk">GN de progresión rápida</h3><ul class="clean"><li>Daño glomerular grave, evolución en <span class="k">meses</span></li><li>Proliferación focal y segmentaria; monocitos y macrófagos forman <span class="k">medias lunas</span> en el espacio de Bowman</li><li>Causas: LES, vasculitis de vasos pequeños (poliangitis microscópica), Goodpasture</li></ul></div><div class="card"><h3 class="blk">Síndrome de Goodpasture</h3><ul class="clean"><li>Anticuerpos anti-MBG y anti-membrana basal alveolar</li><li>Hemorragia pulmonar e insuficiencia renal</li><li>IF: <span class="k">lineal</span> para IgG (el patrón granular es el de complejos inmunitarios)</li><li>Desencadena: influenza, hidrocarburos, fármacos, cáncer</li><li>Tratamiento: plasmaféresis, corticoides y ciclofosfamida</li></ul></div></div></section>
+<section id="p-nefro" role="tabpanel" hidden><div class="eyebrow">Unidad II · Función glomerular</div><h2 class="sec">Síndrome nefrótico</h2><p class="lede">No es una enfermedad específica: es el conjunto de manifestaciones por aumento de la permeabilidad glomerular y pérdida de proteínas plasmáticas.</p><div class="block grid g2"><div class="card"><h3 class="blk">Criterios</h3><ul class="clean"><li>Proteinuria masiva <span class="k">>3,5 g/día</span></li><li>Hipoalbuminemia <span class="k"><3 g/dL</span></li><li>Edema generalizado</li><li>Hiperlipidemia (colesterol >300 mg/dL)</li><li>Lipiduria (cuerpos ovales, cilindros grasos)</li></ul></div><div class="card"><h3 class="blk">Mecanismo</h3><div class="flow"><span class="s">↑ permeabilidad</span><span class="a">→</span><span class="s">proteinuria masiva</span><span class="a">→</span><span class="s hot">hipoalbuminemia</span><span class="a">→</span><span class="s">↓ presión oncótica</span><span class="a">→</span><span class="s">edema</span></div><p class="cap">Retención de sodio y agua: ↑ aldosterona, activación simpática, ↓ factores natriuréticos. Hiperlipidemia (TG y LDL) → aterosclerosis. Se pierden proteínas de unión: ↑ fármacos libres.</p></div></div><div class="block"><h3 class="blk">Etiología</h3><div class="tw"><table><thead><tr><th>Causa</th><th>Datos clave</th></tr></thead><tbody><tr><td class="rh">Cambios mínimos (nefrosis lipoide)</td><td>Pérdida difusa de pedículos. Común en niños. <span class="k">No progresa a insuficiencia renal</span></td></tr><tr><td class="rh">GN membranosa</td><td>Causa primaria más común en adultos. Engrosamiento difuso de la MBG por complejos inmunitarios. Idiopática, LES, hepatitis B, diabetes</td></tr><tr><td class="rh">Glomeruloesclerosis segmentaria focal</td><td>Colágeno en porciones de algunos glomérulos. Falciforme, VIH, drogas IV. Evoluciona con HTA y pérdida de función renal</td></tr><tr><td class="rh">Secundario</td><td>Diabetes mellitus, LES</td></tr></tbody></table></div></div><div class="block"><div class="trap"><span class="lbl">Complicaciones</span><p>Infecciones (estafilococos, neumococos), tendencia a <span class="k">tromboembolia</span>, hiperlipidemia, desnutrición proteica y alteraciones del transporte de fármacos.</p></div></div></section>
+<section id="p-ab" role="tabpanel" hidden><div class="eyebrow">Unidad II · Ácido-base</div><h2 class="sec">Equilibrio ácido-base</h2><p class="lede">Ácido: dona H⁺ (fuerte: HCl; débil: H2CO3). Base: acepta H⁺ (fuerte: OH⁻; débil: HCO3⁻). Si el pH es menor que 7,35 hay acidosis. Si es mayor que 7,45, alcalosis.</p><div class="block grid g2"><div class="card"><h3 class="blk">Valores normales</h3><ul class="clean"><li>pH <span class="k">7,35–7,45</span></li><li>PCO2 <span class="k">35–45 mmHg</span> (respiratorio)</li><li>HCO3 <span class="k">22–26 mEq/L</span> (metabólico)</li></ul></div><div class="card"><h3 class="blk">Sistema tampón</h3><div class="flow"><span class="s">H⁺ + HCO3⁻</span><span class="a">⇄</span><span class="s">H2CO3</span><span class="a">⇄</span><span class="s hot">CO2 + H2O</span></div><p class="cap">Más CO2 empuja a la acidosis. Menos CO2, a la alcalosis. El pulmón regula el CO2. El riñón es el verdadero regulador del HCO3; el intestino solo pierde bicarbonato.</p></div></div><div class="block"><h3 class="blk">Cómo leerlo: MIRO</h3><div class="tw"><table><thead><tr><th>Trastorno</th><th>pH</th><th>Variable primaria</th></tr></thead><tbody><tr><td class="rh">Acidosis metabólica</td><td>↓</td><td>HCO3 <22</td></tr><tr><td class="rh">Alcalosis metabólica</td><td>↑</td><td>HCO3 >26</td></tr><tr><td class="rh">Acidosis respiratoria</td><td>↓</td><td>PCO2 >45</td></tr><tr><td class="rh">Alcalosis respiratoria</td><td>↑</td><td>PCO2 <35</td></tr></tbody></table></div><p class="cap">Primero mira el pH (¿hay disturbio?). Luego pregunta quién tiene la culpa: HCO3 o PCO2.</p></div><div class="block grid g2"><div class="card"><h3 class="blk">Alcalosis respiratoria</h3><ul class="clean"><li>Ventilación excesiva, rara vez por causa orgánica</li><li>Causas: ansiedad, ventilación asistida, SNC, salicilatos, hipoxemia, fiebre, dolor, sepsis por gramnegativos (Pseudomonas)</li><li>Clínica: ansiedad, disnea, <span class="k">tetania, parestesias periorales</span>, vértigo, síncope. PCO2 baja</li></ul></div><div class="card"><h3 class="blk">Acidosis respiratoria</h3><ul class="clean"><li>Aumento primario de CO2 por <span class="k">hipoventilación alveolar</span>, con hipoxemia</li><li>Agudas: fármacos depresores, ACV, meningitis, paro, asma severo, edema pulmonar, neumonía extensa</li><li>Clínica: cefalea, náuseas, confusión, convulsiones, coma, calambres</li></ul></div></div></section>
+<section id="p-dm" role="tabpanel" hidden><div class="eyebrow">Unidad III · Diabetes</div><h2 class="sec">Diabetes mellitus</h2><p class="lede">Posprandial: insulina, anabolismo. Ayuno: glucagón, adrenalina, cortisol y GH, catabolismo (glucogenólisis, gluconeogénesis, lipólisis, cuerpos cetónicos). La diabetes se parece a un ayuno: falta insulina.</p><div class="block"><h3 class="blk">Tipo 1 vs. tipo 2</h3><div class="tw"><table><thead><tr><th></th><th>DM1</th><th>DM2</th></tr></thead><tbody><tr><td class="rh">Mecanismo</td><td>Hipoinsulinismo absoluto, autoinmune (anti-ICA, anti-GAD, anti-IA2). Péptido C indetectable</td><td>Resistencia periférica a la insulina y fatiga pancreática</td></tr><tr><td class="rh">Perfil</td><td>Menor de 30 años, flaco</td><td>Mayor de 45, obeso, síndrome metabólico</td></tr><tr><td class="rh">Clínica</td><td>Poliuria, polidipsia, polifagia, pérdida de peso, <span class="k">cetoacidosis</span></td><td>Asintomática durante años</td></tr><tr><td class="rh">Complicaciones</td><td></td><td>Macrovasculares (IAM, AVE, DAP). Microvasculares (retinopatía, neuropatía, nefropatía)</td></tr></tbody></table></div></div><div class="block grid g2"><div class="card"><h3 class="blk">Diagnóstico (confirmar en 2 ocasiones)</h3><ul class="clean"><li>Glucemia en ayuno <span class="k">≥126 mg/dL</span></li><li>2 h tras 75 g de glucosa ≥200</li><li>HbA1c <span class="k">≥6,5%</span></li><li>Al azar ≥200 con síntomas</li><li>Prediabetes: ayuno 100–125, PTOG 140–199, HbA1c 5,7–6,4%</li></ul></div><div class="card"><h3 class="blk">Síndrome metabólico (3 criterios)</h3><ul class="clean"><li>Cintura: hombre >102 cm, mujer >88 cm</li><li>PA ≥130/85</li><li>TG ≥150</li><li>HDL: hombre <40, mujer <50</li><li>Glucemia en ayuno ≥100</li></ul></div></div><div class="block"><h3 class="blk">Insulinas</h3><div class="tw"><table><thead><tr><th>Tipo</th><th>Inicio</th><th>Pico</th><th>Duración</th></tr></thead><tbody><tr><td class="rh">Lispro, aspart (ultrarrápida)</td><td>5 min</td><td>1 h</td><td>4 h</td></tr><tr><td class="rh">Regular (rápida)</td><td>30 min</td><td>2 h</td><td>6 h</td></tr><tr><td class="rh">NPH (intermedia)</td><td>2 h</td><td>6 h</td><td>12 h</td></tr><tr><td class="rh">Glargina, detemir (lenta)</td><td>2 h</td><td>sin pico</td><td>24 h</td></tr></tbody></table></div><p class="cap">Insulinoterapia en DM1: 0,5–1 UI/kg/día, basal más posprandial. Patrón oro: infusión continua. Hiperglucemia matinal: fenómeno del amanecer o efecto Somogyi (hipoglucemia de madrugada).</p></div><div class="block"><h3 class="blk">Tratamiento de DM2</h3><div class="tw"><table><thead><tr><th>Fármaco</th><th>Efecto</th><th>No usar si</th></tr></thead><tbody><tr><td class="rh">Metformina</td><td>Reduce resistencia, baja peso; riesgo de acidosis láctica</td><td>Creatinina >1,5, ICC, cirrosis descompensada</td></tr><tr><td class="rh">Glitazonas</td><td>Suben peso, retienen sodio</td><td>ICC III–IV, insuficiencia hepática</td></tr><tr><td class="rh">Sulfonilureas</td><td>↑ secreción basal de insulina; hipoglucemia</td><td>Insuficiencia renal</td></tr><tr><td class="rh">Acarbosa</td><td>↓ glucemia posprandial; flatulencia, diarrea</td><td></td></tr><tr><td class="rh">Incretinomiméticos</td><td>Exenatide (análogo GLP-1), gliptinas (inhiben su degradación)</td><td></td></tr></tbody></table></div><p class="cap">Metas: HbA1c <7%, ayuno 70–130, posprandial <180, UTI 140–180. Escalera: metformina, luego 2.ª droga o insulina nocturna, luego 3.ª droga o insulina plena.</p></div></section>
+<section id="p-tir" role="tabpanel" hidden><div class="eyebrow">Unidad III · Endocrino</div><h2 class="sec">Eje y trastornos tiroideos</h2><p class="lede">Hipotálamo (TRH) → hipófisis (TSH) → tiroides (T3, T4), con retroalimentación negativa. La tiroides libera mucho más T4, pero la hormona activa es <span class="k">T3</span>, que se forma en los tejidos. Solo la fracción libre actúa: se pide T4 libre.</p><div class="block grid g2"><div class="card"><h3 class="blk">Síntesis</h3><ul class="clean"><li>NIS atrapa yoduro; pendrina lo pasa al coloide</li><li>TPO oxida el yodo y yoda la tirosina de la tiroglobulina: MIT y DIT</li><li>DIT+DIT = T4. MIT+DIT = T3</li><li>TSH estimula captación, organificación, liberación, crecimiento y vascularización</li><li>Transporte: TBG (↓ en desnutrición, nefrótico, cirrosis)</li></ul></div><div class="card"><h3 class="blk">Acciones</h3><ul class="clean"><li>↑ metabolismo basal y calor</li><li>↑ gasto cardíaco, frecuencia, consumo de O2</li><li>↑ motilidad intestinal</li><li>Sensibiliza a catecolaminas</li><li>Esencial para el cerebro infantil</li></ul></div></div><div class="block"><h3 class="blk">Hipo vs. hiper</h3><div class="tw"><table><thead><tr><th></th><th>Hipotiroidismo</th><th>Hipertiroidismo</th></tr></thead><tbody><tr><td class="rh">Laboratorio</td><td>TSH ↑, T4 libre ↓ (primario)</td><td>TSH ↓, T4 libre ↑</td></tr><tr><td class="rh">Clínica</td><td>Fatiga, aumento de peso, frío, piel seca, bradicardia, estreñimiento, voz ronca</td><td>Nerviosismo, pérdida de peso con buen apetito, taquicardia, calor, temblor fino, retracción palpebral</td></tr><tr><td class="rh">Causas</td><td>Primario (tiroides), secundario (hipófisis), terciario (hipotálamo); tiroidectomía, yodo, litio</td><td>Graves (la principal), bocio multinodular, adenoma, tiroiditis</td></tr><tr><td class="rh">Extremo</td><td>Mixedema: edema sin fóvea por mucopolisacáridos</td><td>Tormenta tiroidea: fiebre alta, arritmias, agitación, coma. Se precipita por infección, trauma, cirugía o suspender el tratamiento</td></tr><tr><td class="rh">Complicación</td><td></td><td>Fibrilación auricular en 10–15%</td></tr></tbody></table></div></div><div class="block"><div class="trap"><span class="lbl">Graves</span><p>Autoinmune: anticuerpos estimulan el receptor de TSH. Bocio difuso, oftalmopatía (hasta un tercio): diplopía, pérdida visual por compromiso del nervio óptico, úlcera corneal.</p></div></div></section>
+<section id="p-sup" role="tabpanel" hidden><div class="eyebrow">Unidad III · Corteza suprarrenal</div><h2 class="sec">Fisiología e insuficiencia suprarrenal</h2><p class="lede">La médula secreta catecolaminas. La corteza produce esteroides desde colesterol, regulados por ACTH. La pérdida total de la corteza sin tratamiento es fatal.</p><div class="block"><h3 class="blk">Las tres capas</h3><div class="tw"><table><thead><tr><th>Zona</th><th>Hormona</th><th>Regulación y acción</th></tr></thead><tbody><tr><td class="rh">Glomerulosa</td><td>Mineralocorticoides (aldosterona)</td><td>Renina-angiotensina y potasio. Retiene Na⁺, pierde K⁺</td></tr><tr><td class="rh">Fasciculada</td><td>Glucocorticoides (cortisol)</td><td>CRH → ACTH. Pico entre 6 y 8 h. Gluconeogénesis, proteólisis, resistencia a insulina</td></tr><tr><td class="rh">Reticular</td><td>Andrógenos (DHEAS)</td><td>Vello púbico y axilar en mujeres</td></tr></tbody></table></div></div><div class="block grid g2"><div class="card"><h3 class="blk">Addison (primaria)</h3><ul class="clean"><li>Destrucción de la glándula: autoinmune en <span class="k">75%</span>, tuberculosis, metástasis, histoplasmosis, hemorragia, Waterhouse-Friderichsen</li><li>Hiponatremia, deshidratación, hipotensión ortostática, <span class="k">hiperpotasemia</span>, hipoglucemia, náuseas, pérdida de peso</li><li>Hiperpigmentación (pliegues, encías, mucosas) por ACTH alta</li><li>Tratamiento: hidrocortisona + fludrocortisona, ajustar en estrés</li></ul></div><div class="card"><h3 class="blk">Secundaria y terciaria</h3><ul class="clean"><li>Hipopituitarismo o resección hipofisaria (secundaria); defecto hipotalámico (terciaria)</li><li>Causa frecuente: <span class="k">suspensión abrupta de glucocorticoides</span> (atrofia por supresión del eje)</li><li>ACTH baja, sin hiperpigmentación (en la primaria la ACTH está alta)</li></ul></div></div><div class="block"><div class="trap"><span class="lbl">Crisis suprarrenal aguda</span><p>Emergencia: náuseas, vómitos, debilidad, hipotensión, deshidratación, colapso. Se desencadena incluso con estrés leve. Tratamiento «5 S»: sal, suplemento de azúcar (dextrosa), esteroides, soporte fisiológico y supervisión de la causa.</p></div></div></section>
+<section id="p-cush" role="tabpanel" hidden><div class="eyebrow">Unidad III · Corteza suprarrenal</div><h2 class="sec">Síndrome de Cushing</h2><p class="lede">Manifestaciones del hipercortisolismo, sea cual sea la causa.</p><div class="block grid g2"><div class="card"><h3 class="blk">Causas</h3><ul class="clean"><li>Hipofisaria (enfermedad de Cushing): adenoma productor de ACTH</li><li>Suprarrenal: tumor productor de cortisol</li><li>Ectópico: p. ej. carcinoma microcítico de pulmón (ACTH)</li><li>Iatrogénico: glucocorticoides prolongados</li></ul></div><div class="card"><h3 class="blk">Clínica</h3><ul class="clean"><li>Obesidad central, cara en <span class="k">luna llena</span>, cuello de búfalo</li><li>Estrías rojo-violáceas, piel fina, equimosis</li><li>Miopatía proximal, osteoporosis</li><li>HTA, intolerancia a la glucosa o DM</li><li>Depresión, insomnio, inmunodepresión, glaucoma, hirsutismo</li></ul></div></div><div class="block"><h3 class="blk">Diagnóstico</h3><div class="tw"><table><thead><tr><th>Paso</th><th>Criterio</th></tr></thead><tbody><tr><td class="rh">Cribado (2 de 3 anormales)</td><td>Cortisol libre en orina >100 µg/24 h. Cortisol 8:00 ≥1,8–2 µg/dL tras 1 mg de dexametasona a las 23:00. Cortisol salival a medianoche >1,6 ng/mL</td></tr><tr><td class="rh">Pérdida del ritmo circadiano</td><td>Signo precoz y característico. La saliva a medianoche es muy confiable</td></tr><tr><td class="rh">Falsos positivos</td><td>Obesidad, alcoholismo, depresión, fármacos que aceleran el metabolismo de la dexametasona (seudo-Cushing)</td></tr><tr><td class="rh">Etiología: ACTH</td><td>Suprarrenal: ACTH <5 pg/mL. Ectópica: más alta (>15–20). Zona gris 5–20: prueba de CRH. Dexametasona en dosis altas ayuda a diferenciar</td></tr></tbody></table></div></div><div class="block"><div class="trap"><span class="lbl">Tratamiento</span><p>Enfermedad de Cushing: resección transesfenoidal y reemplazo de cortisol por 6–12 meses. Adenoma suprarrenal: suprarrenalectomía. Tumor ectópico: extirpación si es posible.</p></div></div></section>
+<section id="p-cite" role="tabpanel" hidden><div class="eyebrow">Entrenamiento de memoria</div><h2 class="sec">Cite…</h2><p class="lede">Preguntas de listado. Responde en voz alta y abre para comprobar. La estrella marca las de mayor rendimiento.</p><div class="cite-group"><h3>Glomerulopatías</h3><div class="cite-list"><details class="cq"><summary><span class="star">★</span>Cite los cambios celulares de la enfermedad glomerular<span class="n">4</span></summary><ol><li>Proliferación celular</li><li>Engrosamiento de la membrana basal</li><li>Esclerosis</li><li>Fibrosis</li></ol></details><details class="cq"><summary><span class="star">★</span>Cite los criterios del síndrome nefrótico<span class="n">5</span></summary><ol><li>Proteinuria >3,5 g/día</li><li>Hipoalbuminemia <3 g/dL</li><li>Edema generalizado</li><li>Hiperlipidemia (colesterol >300)</li><li>Lipiduria</li></ol></details><details class="cq"><summary>Cite las etiologías primarias del síndrome nefrótico<span class="n">3</span></summary><ol><li>Enfermedad de cambios mínimos</li><li>GN membranosa</li><li>Glomeruloesclerosis segmentaria focal</li></ol></details><details class="cq"><summary><span class="star">★</span>Cite las causas de GN de progresión rápida<span class="n">3</span></summary><ol><li>LES</li><li>Vasculitis de vasos pequeños (poliangitis microscópica)</li><li>Síndrome de Goodpasture</li></ol></details><details class="cq"><summary>Cite las complicaciones del síndrome nefrótico<span class="n">4</span></summary><ol><li>Infecciones (estafilococos, neumococos)</li><li>Tromboembolia</li><li>Hiperlipidemia y desnutrición proteica</li><li>↑ fracción libre de fármacos</li></ol></details></div></div><div class="cite-group"><h3>Ácido-base y diabetes</h3><div class="cite-list"><details class="cq"><summary><span class="star">★</span>Cite los valores normales ácido-base<span class="n">3</span></summary><ol><li>pH 7,35–7,45</li><li>PCO2 35–45 mmHg</li><li>HCO3 22–26 mEq/L</li></ol></details><details class="cq"><summary><span class="star">★</span>Cite los criterios del síndrome metabólico (3 de 5)<span class="n">5</span></summary><ol><li>Cintura >102 cm (H) o >88 cm (M)</li><li>PA ≥130/85</li><li>TG ≥150</li><li>HDL <40 (H) o <50 (M)</li><li>Glucemia en ayuno ≥100</li></ol></details><details class="cq"><summary><span class="star">★</span>Cite los criterios diagnósticos de diabetes<span class="n">4</span></summary><ol><li>Ayuno ≥126</li><li>2 h PTOG ≥200</li><li>HbA1c ≥6,5%</li><li>Al azar ≥200 con síntomas</li></ol></details><details class="cq"><summary>Cite los pasos de la síntesis de hormona tiroidea<span class="n">5</span></summary><ol><li>Atrapamiento de yoduro (NIS)</li><li>Transporte al coloide (pendrina)</li><li>Oxidación del yodo (TPO)</li><li>Yodación de tirosina (MIT, DIT)</li><li>Acoplamiento: T4 y T3</li></ol></details></div></div><div class="cite-group"><h3>Endocrino</h3><div class="cite-list"><details class="cq"><summary><span class="star">★</span>Cite las causas de Cushing<span class="n">4</span></summary><ol><li>Hipofisaria</li><li>Suprarrenal</li><li>Ectópica</li><li>Iatrogénica</li></ol></details><details class="cq"><summary><span class="star">★</span>Cite las pruebas de cribado de Cushing<span class="n">3</span></summary><ol><li>Cortisol libre en orina</li><li>Dexametasona 1 mg</li><li>Cortisol salival a medianoche</li></ol></details><details class="cq"><summary>Cite las causas de Addison<span class="n">5</span></summary><ol><li>Autoinmune (75%)</li><li>Tuberculosis</li><li>Metástasis</li><li>Histoplasmosis</li><li>Hemorragia suprarrenal, Waterhouse-Friderichsen</li></ol></details></div></div></section>
+<section id="p-cards" role="tabpanel" hidden><div class="eyebrow">Memorización activa</div><h2 class="sec">Flashcards</h2><p class="lede">Elige un tema, lee la pregunta, intenta responder y solo entonces muestra la respuesta.</p><div class="block"><div class="chiprow" id="fcChips"></div><div class="fc-stage"><div class="fc-meta"><span id="fcPos">1 / 1</span><span id="fcScore">aciertos 0 · errores 0</span></div><div class="fc" id="fcCard" aria-live="polite"></div><div class="actions" id="fcActions"></div></div></div></section>
+<section id="p-quiz" role="tabpanel" hidden><div class="eyebrow">Prueba final</div><h2 class="sec">Simulacro</h2><p class="lede"></p><div class="block"><div class="qz-bar"><div class="qz-prog"><div class="qz-fill" id="qzFill"></div></div><span class="score" id="qzScore">0 respondidas</span><button class="btn" id="qzReset" type="button">Rehacer</button></div><div class="qz-list" id="qzList"></div><div class="good-box" id="qzFinal" hidden style="margin-top:14px"><span class="lbl">Resultado</span><p id="qzFinalTxt"></p></div></div></section>
+</main>
+<script>
+/* ---------- tema ---------- */
+(function(){
+  var root=document.documentElement, btn=document.getElementById('themeBtn');
+  try{ var s=localStorage.getItem('fp-theme'); if(s) root.setAttribute('data-theme',s); }catch(e){}
+  function isDark(){
+    var t=root.getAttribute('data-theme');
+    if(t) return t==='dark';
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  function label(){ btn.textContent = isDark() ? 'modo claro' : 'modo oscuro'; }
+  label();
+  btn.addEventListener('click',function(){
+    var next=isDark()?'light':'dark';
+    root.setAttribute('data-theme',next);
+    try{ localStorage.setItem('fp-theme',next); }catch(e){}
+    label();
+  });
+})();
+
+/* ---------- pestañas ---------- */
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  var panels=[].slice.call(document.querySelectorAll('[role=tabpanel]'));
+  function show(p){
+    if(!panels.some(function(x){return x.id==='p-'+p;})) p='inicio';
+    panels.forEach(function(x){ x.hidden = x.id!=='p-'+p; });
+    tabs.forEach(function(t){
+      var on=t.getAttribute('data-p')===p;
+      t.setAttribute('aria-selected', on?'true':'false');
+      if(on && t.scrollIntoView){ try{ t.scrollIntoView({block:'nearest',inline:'center'}); }catch(e){} }
+    });
+  }
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(){
+      var p=t.getAttribute('data-p');
+      show(p);
+      try{ location.hash=p; }catch(e){}
+      window.scrollTo(0,0);
+    });
+  });
+  window.addEventListener('hashchange',function(){ show(location.hash.slice(1)); });
+  show(location.hash.slice(1));
+})();
+
+/* ---------- flashcards ---------- */
+(function(){
+  var CARDS=[{t:"Glomerulopatías",q:"¿Qué patrón de IF tiene la GN postestreptocócica?",a:"Granular de IgG y C3 en mesangio y MBG."},{t:"Glomerulopatías",q:"¿Y el Goodpasture?",a:"Lineal de IgG a lo largo de la MBG (anti-MBG)."},{t:"Glomerulopatías",q:"¿Cuándo aparece la GN postestreptocócica?",a:"<b>7–12 días</b> después de faringe o piel. C3 bajo, ASO elevada."},{t:"Glomerulopatías",q:"¿Qué forma la «media luna»?",a:"Proliferación de células glomerulares con monocitos y macrófagos en el espacio de Bowman (GN de progresión rápida)."},{t:"Glomerulopatías",q:"Tratamiento del Goodpasture",a:"Plasmaféresis, corticoides y ciclofosfamida."},{t:"Síndrome nefrótico",q:"¿Proteinuria que define al nefrótico?",a:"Mayor de <b>3,5 g/día</b>."},{t:"Síndrome nefrótico",q:"¿Por qué hay edema en el nefrótico?",a:"Hipoalbuminemia (↓ presión oncótica) más retención de sodio y agua (aldosterona, simpático, ↓ natriuréticos)."},{t:"Síndrome nefrótico",q:"Causa primaria más común en adultos",a:"<b>GN membranosa</b>."},{t:"Síndrome nefrótico",q:"¿Qué enfermedad no progresa a insuficiencia renal?",a:"Enfermedad de cambios mínimos (nefrosis lipoide)."},{t:"Síndrome nefrótico",q:"¿Por qué suben los fármacos libres?",a:"Se pierde albúmina, que los transporta."},{t:"Ácido-base",q:"Valores normales",a:"pH 7,35–7,45. PCO2 35–45. HCO3 22–26."},{t:"Ácido-base",q:"Regla MIRO",a:"Metabólico: pH y HCO3 iguales. Respiratorio: pH y PCO2 opuestos."},{t:"Ácido-base",q:"¿Quién regula el CO2 y quién el HCO3?",a:"El pulmón regula el CO2. El riñón es el verdadero regulador del HCO3."},{t:"Ácido-base",q:"Signos de la alcalosis respiratoria",a:"Tetania, parestesias periorales, vértigo, síncope. PCO2 baja."},{t:"Diabetes",q:"Marcadores de la DM1",a:"Péptido C indetectable; anti-ICA, anti-GAD, anti-IA2; cetoacidosis."},{t:"Diabetes",q:"Meta de HbA1c",a:"Menor de <b>7%</b>. Ayuno 70–130, posprandial <180."},{t:"Diabetes",q:"Insulina regular: inicio, pico y duración",a:"30 min, 2 h, 6 h."},{t:"Diabetes",q:"¿Cuándo no usar metformina?",a:"Creatinina >1,5, ICC, cirrosis descompensada. Riesgo de acidosis láctica."},{t:"Tiroides",q:"¿Cuál es la hormona activa y por qué se pide T4 libre?",a:"T3 es la activa. Solo la fracción libre actúa."},{t:"Tiroides",q:"Perfil del hipotiroidismo primario",a:"TSH alta, T4 libre baja."},{t:"Tiroides",q:"¿Qué es el mixedema?",a:"Edema sin fóvea por mucopolisacáridos en el tejido conjuntivo."},{t:"Tiroides",q:"Desencadenantes de la tormenta tiroidea",a:"Infección, trauma, cirugía tiroidea, hipertiroidismo no tratado o suspensión del antitiroideo."},{t:"Suprarrenal",q:"¿Qué produce cada zona?",a:"Glomerulosa: aldosterona. Fasciculada: cortisol. Reticular: andrógenos."},{t:"Suprarrenal",q:"Electrolitos en el Addison",a:"Hiponatremia e hiperpotasemia (falta aldosterona)."},{t:"Suprarrenal",q:"Tratamiento del Addison",a:"Hidrocortisona y fludrocortisona. Ajustar en estrés."},{t:"Suprarrenal",q:"Las 5 S de la crisis suprarrenal",a:"Sal, suplemento de azúcar, suplemento de esteroides, soporte fisiológico, supervisión."},{t:"Cushing",q:"Cribado de Cushing",a:"Cortisol libre en orina >100 µg/24 h; dexametasona 1 mg (≥1,8–2 µg/dL); saliva a medianoche >1,6 ng/mL."},{t:"Cushing",q:"ACTH <5 pg/mL con cortisol alto",a:"Tumor suprarrenal productor de cortisol."},{t:"Cushing",q:"Tratamiento de la enfermedad de Cushing",a:"Resección transesfenoidal del adenoma."}
+  ];
+  var topics=['Todos'].concat(CARDS.map(function(c){return c.t;}).filter(function(v,i,a){return a.indexOf(v)===i;}));
+  var filter='Todos', deck=[], i=0, flip=false, ok=0, bad=0;
+  var chips=document.getElementById('fcChips'), card=document.getElementById('fcCard'),
+      act=document.getElementById('fcActions'), pos=document.getElementById('fcPos'), sc=document.getElementById('fcScore');
+
+  function drawChips(){
+    chips.innerHTML='';
+    topics.forEach(function(t){
+      var b=document.createElement('button'); b.type='button'; b.className='chip'; b.textContent=t;
+      b.setAttribute('aria-pressed', t===filter?'true':'false');
+      b.addEventListener('click',function(){ filter=t; ok=0; bad=0; build(); });
+      chips.appendChild(b);
+    });
+  }
+  function btn(txt,cls,fn){ var b=document.createElement('button'); b.type='button'; b.className='btn '+cls; b.textContent=txt; b.addEventListener('click',fn); return b; }
+  function render(){
+    var c=deck[i];
+    pos.textContent=(i+1)+' / '+deck.length;
+    sc.textContent='aciertos '+ok+' · errores '+bad;
+    card.innerHTML='<div class="fc-q"></div>'+(flip?'<div class="fc-a">'+c.a+'</div>':'');
+    card.firstChild.textContent=c.q;
+    act.innerHTML='';
+    if(!flip){
+      act.appendChild(btn('Mostrar respuesta','primary',function(){flip=true;render();}));
+      act.appendChild(btn('Mezclar','ghost',function(){shuffle();}));
+    }else{
+      act.appendChild(btn('Acerté','good',function(){ok++;next();}));
+      act.appendChild(btn('Fallé','bad',function(){bad++;next();}));
+    }
+  }
+  function next(){ flip=false; i=(i+1)%deck.length; render(); }
+  function shuffle(){
+    for(var k=deck.length-1;k>0;k--){ var j=Math.floor(Math.random()*(k+1)); var t=deck[k]; deck[k]=deck[j]; deck[j]=t; }
+    i=0; flip=false; render();
+  }
+  function build(){
+    deck=CARDS.filter(function(c){return filter==='Todos'||c.t===filter;});
+    i=0; flip=false; drawChips(); render();
+  }
+  build();
+})();
+
+/* ---------- simulacro ---------- */
+(function(){
+  var Q=[{q:"Niña de 8 años con edema, orina «agua de carne», faringitis hace 2 semanas, C3 bajo y ASO alta. Diagnóstico:",o:["Síndrome nefrótico", "GN postinfecciosa aguda", "Goodpasture", "Cambios mínimos"],a:1,e:"Faringitis previa, hematuria, HTA, C3 bajo y ASO alta: síndrome nefrítico postestreptocócico."},
+{q:"Hombre de 45 años con edema generalizado, proteinuria >3,5 g/día, albúmina 2,0 y colesterol alto. Diagnóstico:",o:["Síndrome nefrítico", "Síndrome nefrótico", "Addison", "Cushing"],a:1,e:"Proteinuria masiva, hipoalbuminemia, hiperlipidemia y edema definen el síndrome nefrótico."},
+{q:"La IF lineal para IgG en la MBG es típica de:",o:["GN postestreptocócica", "GN membranosa", "Goodpasture", "Cambios mínimos"],a:2,e:"Anti-MBG da patrón lineal. Los complejos inmunitarios dan patrón granular."},
+{q:"Complicación característica del síndrome nefrótico:",o:["Hematuria macroscópica", "Tromboembolia", "Oliguria grave", "Hemorragia pulmonar"],a:1,e:"También infecciones por estafilococos y neumococos."},
+{q:"Causa primaria más común de síndrome nefrótico en adultos:",o:["GN membranosa", "Cambios mínimos", "Goodpasture", "Poliangitis"],a:0,e:"En niños predominan los cambios mínimos."},
+{q:"pH 7,30 con HCO3 15 mEq/L indica:",o:["Acidosis metabólica", "Alcalosis metabólica", "Acidosis respiratoria", "Alcalosis respiratoria"],a:0,e:"pH bajo y HCO3 bajo van iguales (MIRO): acidosis metabólica."},
+{q:"Aumento primario de PCO2 por hipoventilación alveolar es:",o:["Alcalosis respiratoria", "Acidosis respiratoria", "Acidosis metabólica", "Alcalosis metabólica"],a:1,e:"Más CO2 forma más H2CO3 y baja el pH."},
+{q:"Tetania y parestesias periorales con PCO2 baja sugieren:",o:["Acidosis respiratoria", "Alcalosis respiratoria", "Acidosis metabólica", "Addison"],a:1,e:"Hiperventilación (ansiedad, dolor, fiebre, salicilatos)."},
+{q:"Valor diagnóstico de HbA1c para diabetes:",o:["≥5,7%", "≥6,0%", "≥6,5%", "≥7,0%"],a:2,e:"5,7–6,4% es prediabetes. La meta de tratamiento es <7%."},
+{q:"Una insulina de inicio a los 5 minutos y duración de 4 horas es:",o:["Regular", "NPH", "Glargina", "Lispro"],a:3,e:"Lispro y aspart son ultrarrápidas."},
+{q:"Fármaco que se evita con creatinina >1,5:",o:["Acarbosa", "Metformina", "Exenatide", "Insulina"],a:1,e:"Riesgo de acidosis láctica."},
+{q:"Mujer con fatiga, +6 kg, frío, TSH 12,5 y T4 libre 0,6. Diagnóstico:",o:["Hipotiroidismo primario", "Hipotiroidismo secundario", "Graves", "Hipertiroidismo subclínico"],a:0,e:"TSH alta con T4 libre baja: falla de la tiroides."},
+{q:"Fiebre 39 °C, FC 140, FA, TSH 0,005 y T4 libre 4,0 en hipertiroideo no tratado:",o:["Crisis de mixedema", "Tormenta tiroidea", "Feocromocitoma", "Sepsis"],a:1,e:"Tirotoxicosis extrema con TSH suprimida y T4 libre muy alta."},
+{q:"Hombre de 42 años con hiperpigmentación, Na 126, K 5,9, glucosa 62, cortisol 0,9 y ACTH 350:",o:["Insuficiencia secundaria", "Enfermedad de Addison", "Cushing", "Hipotiroidismo"],a:1,e:"ACTH alta con cortisol bajo: insuficiencia primaria."},
+{q:"Mujer de 38 años con cara redonda y estrías; cortisol 3,5 µg/dL tras 1 mg de dexametasona:",o:["Normal, descarta Cushing", "Confirma hipercorticismo endógeno", "Insuficiencia suprarrenal", "Hipercortisolismo cíclico"],a:1,e:"Un valor ≥1,8–2 µg/dL no suprime: cribado positivo."},
+{q:"Cortisol urinario >100 µg/24 h y ACTH <5 pg/mL:",o:["Enfermedad de Cushing", "ACTH ectópica", "Tumor suprarrenal", "Hiperplasia congénita"],a:2,e:"ACTH suprimida: el cortisol viene de la suprarrenal."},
+{q:"Cortisol urinario 180, ACTH 25 que sube con CRH, en hombre con obesidad central:",o:["Enfermedad de Cushing", "ACTH ectópico", "Feocromocitoma", "Insuficiencia suprarrenal"],a:0,e:"La respuesta de ACTH a CRH sugiere origen hipofisario. Se trata con cirugía transesfenoidal."},
+{q:"Prueba más específica para la pérdida del ritmo circadiano del cortisol:",o:["Cortisol plasmático matutino", "Cortisol urinario", "Cortisol salival a medianoche", "Estimulación con ACTH"],a:2,e:"Es confiable y no requiere hospitalización."}
+  ];
+  var list=document.getElementById('qzList'), fill=document.getElementById('qzFill'),
+      score=document.getElementById('qzScore'), fin=document.getElementById('qzFinal'),
+      finTxt=document.getElementById('qzFinalTxt'), reset=document.getElementById('qzReset');
+  var done=0, right=0;
+  document.getElementById('p-quiz').querySelector('.lede').textContent=Q.length+' preguntas de opción múltiple. Cada respuesta muestra la explicación al instante.';
+
+  function sh(a){ a=a.slice(); for(var k=a.length-1;k>0;k--){ var j=Math.floor(Math.random()*(k+1)); var t=a[k]; a[k]=a[j]; a[j]=t; } return a; }
+  function upd(){
+    fill.style.width=(done/Q.length*100)+'%';
+    score.textContent=done+' / '+Q.length+' respondidas · '+right+' correctas';
+    if(done===Q.length){
+      var pct=Math.round(right/Q.length*100);
+      fin.hidden=false;
+      finTxt.textContent='Acertaste '+right+' de '+Q.length+' ('+pct+'%). '+(pct>=80?'Buen dominio. Repasa solo las que fallaste.':'Vuelve a las pestañas de los temas en que fallaste y rehaz el simulacro.');
+    }
+  }
+  function build(){
+    done=0; right=0; fin.hidden=true; list.innerHTML='';
+    Q.forEach(function(item,n){
+      var order=sh(item.o.map(function(_,k){return k;}));
+      var box=document.createElement('div'); box.className='qz-item';
+      var num=document.createElement('div'); num.className='qz-n'; num.textContent='Pregunta '+(n+1);
+      var q=document.createElement('div'); q.className='qz-q'; q.textContent=item.q;
+      var opts=document.createElement('div'); opts.className='qz-opts';
+      var exp=document.createElement('div'); exp.className='qz-exp'; exp.hidden=true;
+      var buttons=[];
+      order.forEach(function(orig,pos){
+        var b=document.createElement('button'); b.type='button'; b.className='opt';
+        var l=document.createElement('span'); l.className='ltr'; l.textContent='ABCD'.charAt(pos);
+        var t=document.createElement('span'); t.textContent=item.o[orig];
+        b.appendChild(l); b.appendChild(t);
+        b.addEventListener('click',function(){
+          buttons.forEach(function(x){x.b.disabled=true; if(x.orig===item.a) x.b.classList.add('right');});
+          var hit=orig===item.a;
+          if(!hit) b.classList.add('wrong'); else right++;
+          done++;
+          exp.hidden=false;
+          exp.innerHTML='<span class="'+(hit?'ok':'no')+'">'+(hit?'Correcto. ':'Incorrecto. ')+'</span>';
+          exp.appendChild(document.createTextNode(item.e));
+          upd();
+        });
+        buttons.push({b:b,orig:orig});
+        opts.appendChild(b);
+      });
+      box.appendChild(num); box.appendChild(q); box.appendChild(opts); box.appendChild(exp);
+      list.appendChild(box);
+    });
+    upd();
+  }
+  reset.addEventListener('click',function(){ build(); window.scrollTo(0,0); });
+  build();
+})();
+</script>
+
+</body></html>
